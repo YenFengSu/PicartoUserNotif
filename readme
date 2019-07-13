@@ -1,5 +1,9 @@
-1. Install addon "Tampermonkey"
-	Link: https://addons.mozilla.org/zh-TW/firefox/addon/tampermonkey/?src=search
+1. Install addon/extension "Tampermonkey"
+	a. For Firefox
+		Link: https://addons.mozilla.org/zh-TW/firefox/addon/tampermonkey
+	b. For Chrome
+		Link: https://chrome.google.com/webstore/detail/tampermonkey
+	Installing the addon/extension should be quite easy.
 
 2. After installing, this page will pop up. Click the icon in red box on top right.
 	Pic: http://prntscr.com/oei0t4
