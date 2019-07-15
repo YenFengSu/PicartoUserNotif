@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Picarto Chat - User Notification
 // @namespace    I don't know what this is.
-// @version      0.1
+// @version      0.2
 // @description  Plays a sound everytime a new user enters the chat.  Regular user get a door creak, mods get a BANG.
 // @author       HechTea
 // @match        https://picarto.tv/chatpopout/*
