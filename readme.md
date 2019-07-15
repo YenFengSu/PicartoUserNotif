@@ -1,7 +1,10 @@
 1. Install addon/extension "Tampermonkey".
    1. For Firefox
+   
       Link: https://addons.mozilla.org/zh-TW/firefox/addon/tampermonkey
+      
    2. For Chrome
+   
       Link: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
       
    ~~Installing the addon/extension should be quite easy.~~
