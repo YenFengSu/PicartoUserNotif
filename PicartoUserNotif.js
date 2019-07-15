@@ -2,6 +2,7 @@
 // @name         Picarto Chat - User Notification
 // @namespace    I don't know what this is.
 // @version      0.2
+// @updateURL    https://raw.githubusercontent.com/YenFengSu/PicartoUserNotif/master/PicartoUserNotif.js
 // @description  Plays a sound everytime a new user enters the chat.  Regular user get a door creak, mods get a BANG.
 // @author       HechTea
 // @match        https://picarto.tv/chatpopout/*
