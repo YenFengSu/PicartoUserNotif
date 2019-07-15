@@ -128,7 +128,7 @@
 
             if (!(name in users) && !first_time) {
                 // new regular user.  beep.
-                console.log("An user joined the chat!");
+                console.log("An user joined the chat!  " + name);
                 Play_door_creak();
             } else {
                 // existing user, or is first time.  no beep.
@@ -142,7 +142,7 @@
 
             if (!(name in users) && !first_time) {
                 // new moderator.  beep.
-                console.log("A moderator joined the chat!");
+                console.log("A moderator joined the chat!  " + name);
                 Play_Boom();
             } else {
                 // existing moderator, or is first time.  no beep.
