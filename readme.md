@@ -13,7 +13,7 @@
 	Pic: http://prntscr.com/oei18t
     ![img](https://i.imgur.com/quG0tMc.png)
 
-4. Click "Utility", then paste the url "", finally click "install"
+4. Click "Utility", then paste the url "https://raw.githubusercontent.com/YenFengSu/PicartoUserNotif/master/PicartoUserNotif.js", finally click "install"
 	Pic: http://prntscr.com/oei1tx
     ![img](https://i.imgur.com/flQA8sm.png)
 
