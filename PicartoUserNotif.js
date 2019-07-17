@@ -6,6 +6,7 @@
 // @description  Plays a sound everytime a new user enters the chat.  Regular user get a door creak, mods get a BANG.
 // @author       HechTea
 // @match        https://picarto.tv/chatpopout/*
+// @match        https://picarto.tv/HechTea
 // @grant        none
 // ==/UserScript==
 
@@ -19,14 +20,15 @@
         boom: 0.4
     };
 
-    var users = {}
+    var users = {}; // Current users in chat
+    var users_history = {}; // Last exit time
     var USER_STATUS = {
         mod_exist: 1, mod_tbd: -1,
         reg_exist: 2, reg_tbd: -2, /* tbd -> to be determined */
         guest_exist: 3, guest_tbd: -3
     };
     var interval_handle;
-
+    var returning_interval = 1 * 60 * 1000; // 1 minute, in miliseconds
 
     function Init() {
         var audio_door = $("<audio />", {id: "audio_door"});
@@ -124,16 +126,26 @@
         var mods = $("#modUsers").children();
         var i;
         var name;
+        var time = new Date();
         for (i = 0; i < reg_users.length; i++) {
             name = reg_users[i].getAttribute("data-displayname");
 
             if (!(name in users) && !first_time) {
+                if (name in users_history) {
+                    // returning user.
+                    if (time.getTime() - users_history[name] <= returning_interval) {
+                        // treat as a existing user.
+                        users[name] = USER_STATUS.reg_exist;
+                        console.log("An user re-joined the chat.\t\t" + name + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
+                        continue;
+                    }
+                }
+
                 // new regular user.  beep.
-                console.log("An user joined the chat!  " + name);
+                console.log("An user joined the chat!\t\t" + name + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
                 Play_door_creak();
             } else {
                 // existing user, or is first time.  no beep.
-                //console.log("No new regular user.");
             }
             users[name] = USER_STATUS.reg_exist;
         }
@@ -142,31 +154,45 @@
             name = mods[i].getAttribute("data-displayname");
 
             if (!(name in users) && !first_time) {
+                if (name in users_history) {
+                    // returning user.
+                    if (time.getTime() - users_history[name] <= returning_interval) {
+                        // treat as a existing user.
+                        users[name] = USER_STATUS.mod_exist;
+                        console.log("A moderator re-joined the chat!\t\t" + name + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
+                        continue;
+                    }
+                }
+
                 // new moderator.  beep.
-                console.log("A moderator joined the chat!  " + name);
+                console.log("A moderator joined the chat!\t\t" + name + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
                 Play_Boom();
             } else {
                 // existing moderator, or is first time.  no beep.
-                //console.log("No new moderator");
             }
             users[name] = USER_STATUS.mod_exist;
         }
     }
 
     function Check_Leaving() {
+        var time = new Date();
+
         for (var key in users) {
             if (users[key] == USER_STATUS.mod_tbd) {
                 // a user/moderator left.  beep.
-                console.log("A moderator left:  " + key);
+                console.log("A moderator left:\t\t" + key + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
                 delete users[key];
+                users_history[key] = time.getTime();
             } else if (users[key] == USER_STATUS.reg_tbd) {
                 // a user/moderator left.  beep.
-                console.log("A regular user left:  " + key);
+                console.log("A regular user left:\t\t" + key + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
                 delete users[key];
+                users_history[key] = time.getTime();
             } else if (users[key] == USER_STATUS.guest_tbd) {
                 // a user/moderator left.  beep.
-                console.log("A guest left:  " + key);
+                console.log("A guest left:\t\t" + key + "\t\t" + time.getHours() + (time.getMinutes() < 10 ? ":0" : ":") + time.getMinutes());
                 delete users[key];
+                users_history[key] = time.getTime();
             } else {
                 // wut...
             }
